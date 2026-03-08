@@ -170,7 +170,6 @@ export default function App() {
   };
 
   const handleRateChange = (currency, value) => {
-    // 入力中は文字列のまま保持して、空文字も許可する
     setExchangeRates(prev => ({ ...prev, [currency]: value }));
   };
 
@@ -471,12 +470,10 @@ export default function App() {
             </div>
             
             {/* 右側：カテゴリ別集計エリア */}
-            {/* 上(pt-4)と左(pl-4)に余白を追加 */}
             <div className="space-y-6 pt-4 pl-4">
               <h3 className="text-lg font-bold text-slate-800">カテゴリ別</h3>
               
               {/* 収入・支出選択ボタン */}
-              {/* 左に余白をあけた分、バランスを取るために右(pr-4)も指定 */}
               <div className="flex gap-2 justify-center pr-4">
                 {['expense', 'income'].map((type) => (
                   <button
@@ -500,7 +497,6 @@ export default function App() {
                 <div className="flex flex-col md:flex-row items-center gap-8 pr-4">
                   
                   {/* 左側：円グラフ */}
-                  {/* 横並びにするため幅を半分(w-1/2)にし、高さを少し抑える(h-[300px]) */}
                   <div className="w-full md:w-1/2 h-[300px] focus:outline-none *:focus:outline-none">
                     <ResponsiveContainer width="100%" height="100%">
                       <PieChart style={{ outline: 'none' }}>
@@ -517,7 +513,7 @@ export default function App() {
                             .sort((a, b) => b.value - a.value)}
                           cx="50%"
                           cy="50%"
-                          outerRadius={100} // 横並びに合わせて少し小さく調整
+                          outerRadius={100}
                           dataKey="value"
                           labelLine={false}
                           label={({ cx, cy, midAngle, innerRadius, outerRadius, name, percent }) => {
@@ -563,7 +559,7 @@ export default function App() {
                         .filter(([_, a]) => a[categorySummaryType] > 0)
                         .sort((a, b) => b[1][categorySummaryType] - a[1][categorySummaryType]) // 金額順に並び替え
                         .map(([label, amounts], index) => {
-                          // 円グラフと同じ順番で色を取得
+
                           const colors = categorySummaryType === 'income'
                             ? ['#22c55e', '#16a34a', '#15803d', '#166534', '#065f46']
                             : ['#ef4444', '#f97316', '#eab308', '#3b82f6', '#8b5cf6', '#ec4899', '#f43f5e'];
